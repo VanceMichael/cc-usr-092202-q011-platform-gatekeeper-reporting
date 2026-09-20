@@ -1,0 +1,42 @@
+{
+  "domain": "platform-gatekeeper-reporting",
+  "version": 1,
+  "sample_id": "public-sample-011",
+  "actors": [
+    "市场监管人员",
+    "平台企业",
+    "经营商家",
+    "案件审查人员"
+  ],
+  "facts": [
+    "监管将综合运用标准、价格执法和质量监管整治内卷式竞争",
+    "平台企业需要承担数据、算法、流量和规则管理责任",
+    "垄断风险监测与经营者集中审查需要技术支撑"
+  ],
+  "constraints": [
+    "重大事项归并",
+    "整改承诺分派",
+    "证据审签",
+    "复发关联报告"
+  ],
+  "records": [
+    {
+      "id": "platform-gatekeeper-reporting-source",
+      "kind": "source",
+      "label": "监管将综合运用标准、价格执法和质量监管整治内卷式竞争",
+      "status": "active"
+    },
+    {
+      "id": "platform-gatekeeper-reporting-review",
+      "kind": "review",
+      "label": "重大事项归并",
+      "status": "pending"
+    },
+    {
+      "id": "platform-gatekeeper-reporting-history",
+      "kind": "history",
+      "label": "垄断风险监测与经营者集中审查需要技术支撑",
+      "status": "historical"
+    }
+  ]
+}
