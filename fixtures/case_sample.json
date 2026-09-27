@@ -1,0 +1,1062 @@
+{
+  "domain": "platform-gatekeeper-reporting",
+  "version": 2,
+  "as_of": "2026-09-23",
+  "events": [
+    {
+      "id": "EVT-2026-03",
+      "title": "大促期间排序规则 promo-rank v7 流量分发失真事件",
+      "level": "large",
+      "gatekeeper_domains": [
+        "算法",
+        "流量"
+      ],
+      "status": "closed",
+      "first_observed_at": "2026-03-12T07:40:00",
+      "filed_at": "2026-03-13T10:00:00",
+      "filing_deadline": "2026-03-15T07:40:00",
+      "filing_timeliness": "on_time",
+      "filed_by": "合规负责人-周岚",
+      "teams": [
+        "商家治理团队",
+        "流量分发团队"
+      ],
+      "reports": [
+        "RPT-H01",
+        "RPT-H02"
+      ],
+      "snapshot": {
+        "window_start": "2026-03-12T00:30:00",
+        "window_end": "2026-03-12T09:00:00",
+        "rule_versions": [
+          {
+            "code": "promo-rank",
+            "version": "v7",
+            "note": "大促排序权重版本"
+          },
+          {
+            "code": "traffic-shield",
+            "version": "v2",
+            "note": "流量异常兜底策略"
+          }
+        ],
+        "affected_subjects": [
+          {
+            "type": "merchant_segment",
+            "segment": "中小商家",
+            "count": 9800
+          },
+          {
+            "type": "consumer_orders",
+            "count_estimate": 512000
+          }
+        ],
+        "interim_measures": [
+          {
+            "measure": "暂停 promo-rank v7 新权重，回退至 v6 稳定版本",
+            "at": "2026-03-12T09:10"
+          },
+          {
+            "measure": "开通大促申诉绿色通道并优先核处",
+            "at": "2026-03-12T10:00"
+          }
+        ],
+        "frozen_by": "合规负责人-周岚",
+        "frozen_at": "2026-03-13T11:00:00"
+      },
+      "snapshot_corrections": [],
+      "tasks": [
+        {
+          "id": "TASK-0001",
+          "code": "root_cause",
+          "title": "定位 promo-rank v7 权重计算缺陷",
+          "owner_team": "算法平台组",
+          "due": "2026-03-20T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-H01"
+          ],
+          "result_note": "权重归一化缺陷导致补贴敏感商家被系统性降权",
+          "submitted_by": "算法-高衡",
+          "submitted_at": "2026-03-20T10:00:00",
+          "completed_at": "2026-03-20T15:00:00",
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0002",
+          "code": "user_remedy",
+          "title": "对受影响商家补发流量券并逐单回访",
+          "owner_team": "客户服务团队",
+          "due": "2026-03-22T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-H02"
+          ],
+          "result_note": "9800 户商家流量券补发完成，回访满意 96%",
+          "submitted_by": "客服-叶宁",
+          "submitted_at": "2026-03-22T17:30:00",
+          "completed_at": "2026-03-23T09:00:00",
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0003",
+          "code": "policy_revision",
+          "title": "修订排序规则发布与回滚管理办法",
+          "owner_team": "合规与制度组",
+          "due": "2026-03-26T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-H01"
+          ],
+          "result_note": "管理办法增补发布前公平性评估条款",
+          "submitted_by": "制度-方澄",
+          "submitted_at": "2026-03-25T10:00:00",
+          "completed_at": "2026-03-25T15:00:00",
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0004",
+          "code": "retest",
+          "title": "灰度环境复测流量分发公平性指标",
+          "owner_team": "质量保障组",
+          "due": "2026-03-28T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-H01"
+          ],
+          "result_note": "灰度 72 小时曝光基尼系数回到基线区间",
+          "submitted_by": "测试-闻迪",
+          "submitted_at": "2026-03-27T16:00:00",
+          "completed_at": "2026-03-27T17:00:00",
+          "retest_results": [
+            {
+              "passed": true,
+              "by": "合规负责人-周岚",
+              "at": "2026-03-27T17:00:00"
+            }
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "EV-H01",
+          "title": "promo-rank v7 权重缺陷复盘报告",
+          "kind": "root_cause_report",
+          "ref": "docs://gatekeeper/2026/03/EV-H01",
+          "sha256": "h1-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "controlled": false,
+          "uploaded_by": "算法-高衡",
+          "uploaded_at": "2026-03-19T16:00:00",
+          "state": "approved",
+          "reviews": [
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "根因链条与数据复现完整",
+              "at": "2026-03-19T17:00:00"
+            },
+            {
+              "by": "审签-韩静",
+              "decision": "approved",
+              "note": "同意结论与改进方向",
+              "at": "2026-03-20T09:00:00"
+            }
+          ],
+          "supersedes": null
+        },
+        {
+          "id": "EV-H02",
+          "title": "受影响商家流量补偿执行清册",
+          "kind": "remedy_ledger",
+          "ref": "controlled://vault/2026/03/EV-H02",
+          "sha256": "h2-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "controlled": true,
+          "uploaded_by": "客服-叶宁",
+          "uploaded_at": "2026-03-22T15:00:00",
+          "state": "approved",
+          "reviews": [
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "受控清册与补偿口径一致",
+              "at": "2026-03-22T16:00:00"
+            },
+            {
+              "by": "审签-韩静",
+              "decision": "approved",
+              "note": "抽核 30 户无误",
+              "at": "2026-03-22T17:00:00"
+            }
+          ],
+          "supersedes": null
+        }
+      ],
+      "commitments": [
+        {
+          "id": "CMT-H01",
+          "statement": "2026 年二季度前将排序规则变更纳入双人复核与灰度观测",
+          "owner_team": "算法平台组",
+          "due": "2026-06-30T18:00:00",
+          "created_at": "2026-03-23T10:00:00",
+          "status": "verified",
+          "verified_at": "2026-06-25T11:00:00",
+          "verify_note": "复核流程与灰度看板已上线运行",
+          "verified_by": "合规负责人-周岚",
+          "evidence_ids": [
+            "EV-H01"
+          ]
+        }
+      ],
+      "recurrence": {
+        "prior": [],
+        "followups": [
+          {
+            "event_id": "EVT-2026-09",
+            "title": "排序规则回滚引发的商家申诉、价格补贴与流量歧视并发事件",
+            "shared_rule_codes": [
+              "promo-rank"
+            ],
+            "reason": "promo-rank 模块在发布管控失效后半年内再度引发流量分发失真，3 月事件承诺的双人复核未覆盖应急回滚快速通道",
+            "by": "合规负责人-周岚",
+            "at": "2026-09-11T16:00:00"
+          }
+        ]
+      },
+      "closed_at": "2026-06-26T10:00:00",
+      "history": [
+        {
+          "at": "2026-03-13T10:00:00",
+          "by": "合规负责人-周岚",
+          "action": "graded_filing",
+          "detail": "按较大级报送并归并 2 条上报"
+        },
+        {
+          "at": "2026-03-13T11:00",
+          "by": "合规负责人-周岚",
+          "action": "freeze_snapshot",
+          "detail": "冻结影响时间窗、规则版本、受影响主体与临时措施"
+        },
+        {
+          "at": "2026-03-13T14:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派根因调查：定位 promo-rank v7 权重计算缺陷（算法平台组，期限 2026-03-20T18:00）"
+        },
+        {
+          "at": "2026-03-13T14:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派用户补救：对受影响商家补发流量券并逐单回访（客户服务团队，期限 2026-03-22T18:00）"
+        },
+        {
+          "at": "2026-03-13T14:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派制度修订：修订排序规则发布与回滚管理办法（合规与制度组，期限 2026-03-26T18:00）"
+        },
+        {
+          "at": "2026-03-13T14:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派复测验证：灰度环境复测流量分发公平性指标（质量保障组，期限 2026-03-28T18:00）"
+        },
+        {
+          "at": "2026-03-19T16:00",
+          "by": "算法-高衡",
+          "action": "add_evidence",
+          "detail": "登记证据：EV-H01 promo-rank v7 权重缺陷复盘报告"
+        },
+        {
+          "at": "2026-03-19T17:00",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-H01 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-03-20T09:00",
+          "by": "审签-韩静",
+          "action": "review_evidence",
+          "detail": "证据 EV-H01 审签：approved（双人双签完成）"
+        },
+        {
+          "at": "2026-03-20T10:00",
+          "by": "算法-高衡",
+          "action": "submit_task",
+          "detail": "根因调查结果提交审签"
+        },
+        {
+          "at": "2026-03-20T15:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "根因调查办结"
+        },
+        {
+          "at": "2026-03-22T15:00",
+          "by": "客服-叶宁",
+          "action": "add_evidence",
+          "detail": "登记受控附件（商业秘密）：EV-H02 受影响商家流量补偿执行清册"
+        },
+        {
+          "at": "2026-03-22T16:00",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-H02 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-03-22T17:00",
+          "by": "审签-韩静",
+          "action": "review_evidence",
+          "detail": "证据 EV-H02 审签：approved（双人双签完成）"
+        },
+        {
+          "at": "2026-03-22T17:30",
+          "by": "客服-叶宁",
+          "action": "submit_task",
+          "detail": "用户补救结果提交审签"
+        },
+        {
+          "at": "2026-03-23T09:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "用户补救办结"
+        },
+        {
+          "at": "2026-03-25T10:00",
+          "by": "制度-方澄",
+          "action": "submit_task",
+          "detail": "制度修订结果提交审签"
+        },
+        {
+          "at": "2026-03-25T15:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "制度修订办结"
+        },
+        {
+          "at": "2026-03-27T16:00",
+          "by": "测试-闻迪",
+          "action": "submit_task",
+          "detail": "复测验证结果提交审签"
+        },
+        {
+          "at": "2026-03-27T17:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "复测验证办结（复测通过）"
+        },
+        {
+          "at": "2026-03-23T10:00",
+          "by": "合规负责人-周岚",
+          "action": "add_commitment",
+          "detail": "作出整改承诺：CMT-H01（期限 2026-06-30T18:00）"
+        },
+        {
+          "at": "2026-06-25T11:00",
+          "by": "合规负责人-周岚",
+          "action": "verify_commitment",
+          "detail": "承诺 CMT-H01 验证结论：verified"
+        },
+        {
+          "at": "2026-06-26T10:00",
+          "by": "合规负责人-周岚",
+          "action": "close_event",
+          "detail": "通过关闭闸门：任务、证据、承诺与复测全部完成"
+        }
+      ]
+    },
+    {
+      "id": "EVT-2026-09",
+      "title": "排序规则回滚引发的商家申诉、价格补贴与流量歧视并发事件",
+      "level": "major",
+      "gatekeeper_domains": [
+        "数据",
+        "算法",
+        "流量",
+        "规则"
+      ],
+      "status": "remediating",
+      "first_observed_at": "2026-09-10T08:20:00",
+      "filed_at": "2026-09-10T15:40:00",
+      "filing_deadline": "2026-09-11T08:20:00",
+      "filing_timeliness": "on_time",
+      "filed_by": "合规负责人-周岚",
+      "teams": [
+        "价格补贴团队",
+        "商家治理团队",
+        "客户服务团队",
+        "流量分发团队"
+      ],
+      "reports": [
+        "RPT-0001",
+        "RPT-0002",
+        "RPT-0003",
+        "RPT-0004"
+      ],
+      "snapshot": {
+        "window_start": "2026-09-10T02:00:00",
+        "window_end": "2026-09-10T09:30:00",
+        "rule_versions": [
+          {
+            "code": "promo-rank",
+            "version": "v8",
+            "note": "回滚目标版本（旧权重）"
+          },
+          {
+            "code": "promo-rank",
+            "version": "v9",
+            "note": "回滚前版本"
+          },
+          {
+            "code": "subsidy-settle",
+            "version": "v3",
+            "note": "与 v8 配套的补贴计价版本"
+          }
+        ],
+        "affected_subjects": [
+          {
+            "type": "merchant_segment",
+            "segment": "中小商家",
+            "count": 12430
+          },
+          {
+            "type": "consumer_orders",
+            "count_estimate": 865000
+          },
+          {
+            "type": "appeal_tickets",
+            "count_estimate": 4318
+          }
+        ],
+        "interim_measures": [
+          {
+            "measure": "09:10 停止 v8 兜底流量分发，切回 v9 并冻结配置变更",
+            "at": "2026-09-10T09:10"
+          },
+          {
+            "measure": "冻结 09-10 凌晨补贴结算批次，暂停自动打款",
+            "at": "2026-09-10T09:20"
+          },
+          {
+            "measure": "开通商家申诉与消费者退款双通道，优先 24 小时核处",
+            "at": "2026-09-10T10:00"
+          }
+        ],
+        "frozen_by": "合规负责人-周岚",
+        "frozen_at": "2026-09-10T18:00:00"
+      },
+      "snapshot_corrections": [
+        {
+          "seq": 1,
+          "field": "affected_subjects",
+          "before": [
+            {
+              "type": "merchant_segment",
+              "segment": "中小商家",
+              "count": 12000
+            },
+            {
+              "type": "consumer_orders",
+              "count_estimate": 865000
+            },
+            {
+              "type": "appeal_tickets",
+              "count_estimate": 4300
+            }
+          ],
+          "after": [
+            {
+              "type": "merchant_segment",
+              "segment": "中小商家",
+              "count": 12430
+            },
+            {
+              "type": "consumer_orders",
+              "count_estimate": 865000
+            },
+            {
+              "type": "appeal_tickets",
+              "count_estimate": 4318
+            }
+          ],
+          "reason": "结算批次解冻后补录 430 户边缘商家与 18 件延迟工单",
+          "by": "数据-童岑",
+          "at": "2026-09-11T14:00:00"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "TASK-0001",
+          "code": "root_cause",
+          "title": "定位回滚流程为何绕过权重兼容校验",
+          "owner_team": "算法平台组",
+          "due": "2026-09-14T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-001"
+          ],
+          "result_note": "凌晨应急回滚走了人工快速通道，未执行权重兼容校验，promo-rank v8 与 subsidy-settle v3 计价口径不兼容",
+          "submitted_by": "算法-高衡",
+          "submitted_at": "2026-09-14T10:00:00",
+          "completed_at": "2026-09-14T15:00:00",
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0002",
+          "code": "user_remedy",
+          "title": "补贴差价补发、申诉逐户核处与流量补偿",
+          "owner_team": "客户服务团队",
+          "due": "2026-09-20T18:00:00",
+          "status": "done",
+          "evidence_ids": [
+            "EV-002",
+            "EV-004"
+          ],
+          "result_note": "12430 户商家补贴差价与流量补偿全部发放，4318 件申诉办结 99.2%",
+          "submitted_by": "客服-叶宁",
+          "submitted_at": "2026-09-16T15:00:00",
+          "completed_at": "2026-09-16T17:00:00",
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0003",
+          "code": "policy_revision",
+          "title": "修订算法回滚管理办法：双人审批+兼容校验+灰度门禁",
+          "owner_team": "合规与制度组",
+          "due": "2026-09-25T18:00:00",
+          "status": "open",
+          "evidence_ids": [],
+          "result_note": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "completed_at": null,
+          "retest_results": []
+        },
+        {
+          "id": "TASK-0004",
+          "code": "retest",
+          "title": "对修复版本与补贴口径开展全链路复测",
+          "owner_team": "质量保障组",
+          "due": "2026-09-27T18:00:00",
+          "status": "open",
+          "evidence_ids": [],
+          "result_note": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "completed_at": null,
+          "retest_results": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "EV-001",
+          "title": "回滚事件根因技术分析报告",
+          "kind": "root_cause_report",
+          "ref": "docs://gatekeeper/2026/09/EV-001",
+          "sha256": "cur1-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "controlled": false,
+          "uploaded_by": "算法-高衡",
+          "uploaded_at": "2026-09-13T15:00:00",
+          "state": "approved",
+          "reviews": [
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "时间线与回滚操作记录一致",
+              "at": "2026-09-13T16:00:00"
+            },
+            {
+              "by": "审签-韩静",
+              "decision": "approved",
+              "note": "兼容校验被旁路的根因成立",
+              "at": "2026-09-14T09:00:00"
+            }
+          ],
+          "supersedes": null
+        },
+        {
+          "id": "EV-002",
+          "title": "受影响商家补贴与流量补偿清册（受控）",
+          "kind": "remedy_ledger",
+          "ref": "controlled://vault/2026/09/EV-002",
+          "sha256": "cur2-dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "controlled": true,
+          "uploaded_by": "客服-叶宁",
+          "uploaded_at": "2026-09-15T17:00:00",
+          "state": "approved",
+          "reviews": [
+            {
+              "by": "审签-韩静",
+              "decision": "approved",
+              "note": "受控通道内逐户核对，汇总数与封存口径一致",
+              "at": "2026-09-15T18:00:00"
+            },
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "抽核 50 户补偿到账无误",
+              "at": "2026-09-16T09:30:00"
+            }
+          ],
+          "supersedes": null
+        },
+        {
+          "id": "EV-004",
+          "title": "补贴差价补发结算回单汇总",
+          "kind": "settlement_receipt",
+          "ref": "docs://gatekeeper/2026/09/EV-004",
+          "sha256": "cur4-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "controlled": false,
+          "uploaded_by": "结算-韦姗",
+          "uploaded_at": "2026-09-16T11:00:00",
+          "state": "approved",
+          "reviews": [
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "回单金额与清册勾稽一致",
+              "at": "2026-09-16T13:00:00"
+            },
+            {
+              "by": "审签-韩静",
+              "decision": "approved",
+              "note": "同意作为补救完成佐证",
+              "at": "2026-09-16T14:00:00"
+            }
+          ],
+          "supersedes": null
+        },
+        {
+          "id": "EV-003",
+          "title": "算法回滚管理办法（修订稿）",
+          "kind": "policy_draft",
+          "ref": "docs://gatekeeper/2026/09/EV-003",
+          "sha256": "cur3-ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "controlled": false,
+          "uploaded_by": "制度-方澄",
+          "uploaded_at": "2026-09-22T10:00:00",
+          "state": "submitted",
+          "reviews": [
+            {
+              "by": "审签-林绍",
+              "decision": "approved",
+              "note": "双人审批与灰度门禁条款补齐，待法务第二签",
+              "at": "2026-09-22T14:00:00"
+            }
+          ],
+          "supersedes": null
+        }
+      ],
+      "commitments": [
+        {
+          "id": "CMT-001",
+          "statement": "2026-09-17 前完成全部受影响订单的补贴差价补发",
+          "owner_team": "客户服务团队",
+          "due": "2026-09-17T18:00:00",
+          "created_at": "2026-09-11T10:00:00",
+          "status": "verified",
+          "verified_at": "2026-09-16T18:00:00",
+          "verify_note": "结算回单与受控清册勾稽一致，9 月 16 日补发完成",
+          "verified_by": "合规负责人-周岚",
+          "evidence_ids": [
+            "EV-002",
+            "EV-004"
+          ]
+        },
+        {
+          "id": "CMT-002",
+          "statement": "2026-09-22 前发布回滚管理办法，强制双人审批、兼容校验与灰度门禁",
+          "owner_team": "合规与制度组",
+          "due": "2026-09-22T18:00:00",
+          "created_at": "2026-09-11T10:00:00",
+          "status": "open",
+          "verified_at": null,
+          "verify_note": null,
+          "verified_by": null,
+          "evidence_ids": []
+        }
+      ],
+      "recurrence": {
+        "prior": [
+          {
+            "event_id": "EVT-2026-03",
+            "prior_title": "大促期间排序规则 promo-rank v7 流量分发失真事件",
+            "shared_rule_codes": [
+              "promo-rank"
+            ],
+            "current_versions": [
+              "promo-rank@v8",
+              "promo-rank@v9"
+            ],
+            "prior_versions": [
+              "promo-rank@v7"
+            ],
+            "reason": "promo-rank 模块在发布管控失效后半年内再度引发流量分发失真，3 月事件承诺的双人复核未覆盖应急回滚快速通道",
+            "by": "合规负责人-周岚",
+            "at": "2026-09-11T16:00:00"
+          }
+        ],
+        "followups": []
+      },
+      "closed_at": null,
+      "history": [
+        {
+          "at": "2026-09-10T15:40:00",
+          "by": "合规负责人-周岚",
+          "action": "graded_filing",
+          "detail": "按重大级报送并归并 3 条上报"
+        },
+        {
+          "at": "2026-09-11T09:40",
+          "by": "合规负责人-周岚",
+          "action": "merge_report",
+          "detail": "追加上报归并：RPT-0004（客户服务团队）"
+        },
+        {
+          "at": "2026-09-10T18:00",
+          "by": "合规负责人-周岚",
+          "action": "freeze_snapshot",
+          "detail": "冻结影响时间窗、规则版本、受影响主体与临时措施"
+        },
+        {
+          "at": "2026-09-11T14:00",
+          "by": "数据-童岑",
+          "action": "correct_snapshot",
+          "detail": "第 1 次封存修正（affected_subjects），原值已留痕"
+        },
+        {
+          "at": "2026-09-10T19:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派根因调查：定位回滚流程为何绕过权重兼容校验（算法平台组，期限 2026-09-14T18:00）"
+        },
+        {
+          "at": "2026-09-10T19:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派用户补救：补贴差价补发、申诉逐户核处与流量补偿（客户服务团队，期限 2026-09-20T18:00）"
+        },
+        {
+          "at": "2026-09-10T19:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派制度修订：修订算法回滚管理办法：双人审批+兼容校验+灰度门禁（合规与制度组，期限 2026-09-25T18:00）"
+        },
+        {
+          "at": "2026-09-10T19:00",
+          "by": "合规负责人-周岚",
+          "action": "assign_task",
+          "detail": "分派复测验证：对修复版本与补贴口径开展全链路复测（质量保障组，期限 2026-09-27T18:00）"
+        },
+        {
+          "at": "2026-09-13T15:00",
+          "by": "算法-高衡",
+          "action": "add_evidence",
+          "detail": "登记证据：EV-001 回滚事件根因技术分析报告"
+        },
+        {
+          "at": "2026-09-13T16:00",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-001 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-09-14T09:00",
+          "by": "审签-韩静",
+          "action": "review_evidence",
+          "detail": "证据 EV-001 审签：approved（双人双签完成）"
+        },
+        {
+          "at": "2026-09-14T10:00",
+          "by": "算法-高衡",
+          "action": "submit_task",
+          "detail": "根因调查结果提交审签"
+        },
+        {
+          "at": "2026-09-14T15:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "根因调查办结"
+        },
+        {
+          "at": "2026-09-15T17:00",
+          "by": "客服-叶宁",
+          "action": "add_evidence",
+          "detail": "登记受控附件（商业秘密）：EV-002 受影响商家补贴与流量补偿清册（受控）"
+        },
+        {
+          "at": "2026-09-16T11:00",
+          "by": "结算-韦姗",
+          "action": "add_evidence",
+          "detail": "登记证据：EV-004 补贴差价补发结算回单汇总"
+        },
+        {
+          "at": "2026-09-15T18:00",
+          "by": "审签-韩静",
+          "action": "review_evidence",
+          "detail": "证据 EV-002 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-09-16T09:30",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-002 审签：approved（双人双签完成）"
+        },
+        {
+          "at": "2026-09-16T13:00",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-004 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-09-16T14:00",
+          "by": "审签-韩静",
+          "action": "review_evidence",
+          "detail": "证据 EV-004 审签：approved（双人双签完成）"
+        },
+        {
+          "at": "2026-09-16T15:00",
+          "by": "客服-叶宁",
+          "action": "submit_task",
+          "detail": "用户补救结果提交审签"
+        },
+        {
+          "at": "2026-09-16T17:00",
+          "by": "合规负责人-周岚",
+          "action": "complete_task",
+          "detail": "用户补救办结"
+        },
+        {
+          "at": "2026-09-22T10:00",
+          "by": "制度-方澄",
+          "action": "add_evidence",
+          "detail": "登记证据：EV-003 算法回滚管理办法（修订稿）"
+        },
+        {
+          "at": "2026-09-22T14:00",
+          "by": "审签-林绍",
+          "action": "review_evidence",
+          "detail": "证据 EV-003 审签：approved（待另一审批人签署）"
+        },
+        {
+          "at": "2026-09-11T10:00",
+          "by": "合规负责人-周岚",
+          "action": "add_commitment",
+          "detail": "作出整改承诺：CMT-001（期限 2026-09-17T18:00）"
+        },
+        {
+          "at": "2026-09-16T18:00",
+          "by": "合规负责人-周岚",
+          "action": "verify_commitment",
+          "detail": "承诺 CMT-001 验证结论：verified"
+        },
+        {
+          "at": "2026-09-11T10:00",
+          "by": "合规负责人-周岚",
+          "action": "add_commitment",
+          "detail": "作出整改承诺：CMT-002（期限 2026-09-22T18:00）"
+        },
+        {
+          "at": "2026-09-11T16:00",
+          "by": "合规负责人-周岚",
+          "action": "link_recurrence",
+          "detail": "确认与历史事件 EVT-2026-03 构成复发（共同规则模块 promo-rank）"
+        }
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "id": "RPT-0001",
+      "team": "商家治理团队",
+      "title": "商家申诉激增：回退后补贴与曝光问题并发",
+      "detail": "申诉同时指向活动补贴未核销与商品曝光下降，需与其他团队并案核对",
+      "tags": [
+        "algo-rollback",
+        "promo-rank",
+        "merchant-appeal",
+        "subsidy"
+      ],
+      "observed_at": "2026-09-10T09:40:00",
+      "created_at": "2026-09-10T11:20:00",
+      "by": "商家值班-邵敏",
+      "source": "lead_confirmed",
+      "signal_ids": [
+        "SGN-0002"
+      ],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-09"
+    },
+    {
+      "id": "RPT-0002",
+      "team": "价格补贴团队",
+      "title": "回退版本 subsidy-settle 计价口径与当前补贴活动不兼容",
+      "detail": "满减叠加券按旧口径结算，部分订单少补或多扣，批次已冻结",
+      "tags": [
+        "algo-rollback",
+        "promo-rank",
+        "subsidy",
+        "settlement"
+      ],
+      "observed_at": "2026-09-10T10:15:00",
+      "created_at": "2026-09-10T12:05:00",
+      "by": "价格值班-程野",
+      "source": "manual",
+      "signal_ids": [],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-09"
+    },
+    {
+      "id": "RPT-0003",
+      "team": "流量分发团队",
+      "title": "promo-rank 回滚至 v8 后中小商家流量分布异常",
+      "detail": "回滚窗口内两个商家层级曝光占比偏离基线，触发公平性红线",
+      "tags": [
+        "algo-rollback",
+        "promo-rank",
+        "traffic-fairness"
+      ],
+      "observed_at": "2026-09-10T08:20:00",
+      "created_at": "2026-09-10T10:30:00",
+      "by": "流量值班-孟初",
+      "source": "lead_confirmed",
+      "signal_ids": [
+        "SGN-0001"
+      ],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-09"
+    },
+    {
+      "id": "RPT-0004",
+      "team": "客户服务团队",
+      "title": "热线侧同窗口补贴与流量类来电集中出现",
+      "detail": "来电工单时间窗与标签与已立事件重合",
+      "tags": [
+        "algo-rollback",
+        "promo-rank",
+        "merchant-appeal"
+      ],
+      "observed_at": "2026-09-10T13:00:00",
+      "created_at": "2026-09-11T09:00:00",
+      "by": "客服值班-叶宁",
+      "source": "manual",
+      "signal_ids": [],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-09"
+    },
+    {
+      "id": "RPT-H01",
+      "team": "流量分发团队",
+      "title": "promo-rank v7 上线后中小商家曝光异常下降",
+      "detail": "3 月 12 日开门红后两个流量层级偏离基线 30% 以上",
+      "tags": [
+        "promo-rank",
+        "traffic-fairness",
+        "major-sale"
+      ],
+      "observed_at": "2026-03-12T07:40:00",
+      "created_at": "2026-03-12T07:40:00",
+      "by": "流量值班-孟初",
+      "source": "lead_confirmed",
+      "signal_ids": [
+        "SGN-H01"
+      ],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-03"
+    },
+    {
+      "id": "RPT-H02",
+      "team": "商家治理团队",
+      "title": "大促商家申诉量环比上升，集中反馈曝光骤降",
+      "detail": "申诉工单标签集中在“搜索曝光”与“活动流量”",
+      "tags": [
+        "promo-rank",
+        "merchant-appeal",
+        "major-sale"
+      ],
+      "observed_at": "2026-03-12T08:30:00",
+      "created_at": "2026-03-12T08:30:00",
+      "by": "商家值班-邵敏",
+      "source": "manual",
+      "signal_ids": [],
+      "status": "merged",
+      "merged_event_id": "EVT-2026-03"
+    }
+  ],
+  "signals": [
+    {
+      "id": "SGN-0001",
+      "source_kind": "monitor_signal",
+      "monitor": "流量公平监测（自动监测）",
+      "rule_code": "promo-rank",
+      "title": "凌晨回滚后中小商家曝光骤降，疑似回滚到旧权重",
+      "detail": "02:00 后曝光基尼系数 18 分钟内突破红线；线索不含定级，不得自动立案",
+      "observed_at": "2026-09-10T08:20:00",
+      "teams": [
+        "流量分发团队"
+      ],
+      "confidence": "high",
+      "status": "converted",
+      "linked_report_ids": [
+        "RPT-0003"
+      ],
+      "suspected_event_id": "EVT-2026-03"
+    },
+    {
+      "id": "SGN-0002",
+      "source_kind": "monitor_signal",
+      "monitor": "商家申诉舆情监测（自动监测）",
+      "rule_code": "promo-rank",
+      "title": "商家申诉工单激增并出现“补贴没到账+流量掉了”并诉",
+      "detail": "08:00 至 09:00 关联工单环比上升 240%",
+      "observed_at": "2026-09-10T09:10:00",
+      "teams": [
+        "商家治理团队"
+      ],
+      "confidence": "medium",
+      "status": "converted",
+      "linked_report_ids": [
+        "RPT-0001"
+      ],
+      "suspected_event_id": null
+    },
+    {
+      "id": "SGN-0003",
+      "source_kind": "monitor_signal",
+      "monitor": "价格爬虫巡检（自动监测）",
+      "rule_code": "price-crawler",
+      "title": "部分商品页面价格抖动（疑似误报）",
+      "detail": "跨域时间戳不一致导致的巡检噪声",
+      "observed_at": "2026-09-10T11:00:00",
+      "teams": [
+        "价格补贴团队"
+      ],
+      "confidence": "low",
+      "status": "dismissed",
+      "linked_report_ids": [],
+      "suspected_event_id": null,
+      "disposition": {
+        "by": "价格值班-程野",
+        "reason": "爬虫时钟漂移，与本次回滚无关，不予转报"
+      }
+    },
+    {
+      "id": "SGN-H01",
+      "source_kind": "monitor_signal",
+      "monitor": "大促流量看板（自动监测）",
+      "rule_code": "promo-rank",
+      "title": "大促开门红时段部分商家曝光偏离基线",
+      "detail": "曝光基尼系数超阈值，自动监测仅输出线索",
+      "observed_at": "2026-03-12T07:10:00",
+      "teams": [
+        "流量分发团队",
+        "商家治理团队"
+      ],
+      "confidence": "high",
+      "status": "converted",
+      "linked_report_ids": [
+        "RPT-H01"
+      ],
+      "suspected_event_id": null
+    }
+  ]
+}
