@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "平台守门人重大事项与整改报告服务快照",
+  "type": "object",
+  "required": ["domain", "service", "version", "generated_at", "incidents", "leads"],
+  "properties": {
+    "domain": {
+      "type": "string",
+      "const": "platform-gatekeeper-reporting"
+    },
+    "service": {
+      "type": "string",
+      "const": "major-event-remediation-reporting"
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "incidents": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/incident" }
+    },
+    "leads": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lead" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "incident": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "level",
+        "domains",
+        "status",
+        "reporter",
+        "first_detected_at",
+        "report_deadline",
+        "merged_report_ids",
+        "source_team_reports",
+        "frozen_at",
+        "frozen_by",
+        "frozen",
+        "freeze_revisions",
+        "actions",
+        "regulator_summary",
+        "recurrence_links",
+        "created_from_lead_id",
+        "closed_at"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "level": { "enum": ["重大", "较大", "一般"] },
+        "domains": {
+          "type": "array",
+          "items": {
+            "enum": ["数据", "算法", "流量", "规则"]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "status": {
+          "enum": ["草拟", "已报送", "整改中", "复测中", "已关闭"]
+        },
+        "reporter": { "type": "string", "minLength": 1 },
+        "first_detected_at": { "type": "string", "minLength": 1 },
+        "report_deadline": { "type": "string", "minLength": 1 },
+        "reported_at": { "type": "string" },
+        "merged_report_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "source_team_reports": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/teamReport" }
+        },
+        "frozen_at": { "type": ["string", "null"] },
+        "frozen_by": { "type": ["string", "null"] },
+        "frozen": { "$ref": "#/$defs/frozen" },
+        "freeze_revisions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/freezeRevision" }
+        },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/action" }
+        },
+        "regulator_summary": { "type": ["string", "null"] },
+        "recurrence_links": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "created_from_lead_id": { "type": ["string", "null"] },
+        "closed_at": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "teamReport": {
+      "type": "object",
+      "required": [
+        "report_id",
+        "team",
+        "reporter",
+        "occurred_at",
+        "rule_versions",
+        "keywords",
+        "summary",
+        "merged_at"
+      ],
+      "properties": {
+        "report_id": { "type": "string", "minLength": 1 },
+        "team": { "type": "string", "minLength": 1 },
+        "reporter": { "type": "string", "minLength": 1 },
+        "occurred_at": { "type": "string", "minLength": 1 },
+        "rule_versions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "summary": { "type": "string" },
+        "merged_at": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "frozen": {
+      "type": "object",
+      "properties": {
+        "affected_window": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "string", "minLength": 1 },
+            "end": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        "rule_versions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "affected_subjects": {
+          "type": "object",
+          "minProperties": 1
+        },
+        "interim_measures": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "freezeRevision": {
+      "type": "object",
+      "required": ["field", "field_label", "before", "after", "reason", "by", "at"],
+      "properties": {
+        "field": {
+          "enum": [
+            "affected_window",
+            "rule_versions",
+            "affected_subjects",
+            "interim_measures"
+          ]
+        },
+        "field_label": {
+          "enum": ["影响时间窗", "规则/算法版本", "受影响主体", "临时措施"]
+        },
+        "before": {},
+        "after": {},
+        "reason": { "type": "string", "minLength": 1 },
+        "by": { "type": "string", "minLength": 1 },
+        "at": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "commitment": {
+      "type": "object",
+      "required": ["action_kind", "content", "due_at", "owner_team"],
+      "properties": {
+        "action_kind": {
+          "enum": ["根因调查", "用户补救", "制度修订", "复测"]
+        },
+        "content": { "type": "string", "minLength": 1 },
+        "due_at": { "type": "string", "minLength": 1 },
+        "owner_team": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "attachment": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "contains_trade_secret",
+        "visibility",
+        "redacted_view",
+        "controlled_ref",
+        "uploaded_by",
+        "uploaded_at",
+        "authorized_reviewers"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "contains_trade_secret": { "type": "boolean" },
+        "visibility": { "enum": ["受控", "监管可见", "内部"] },
+        "redacted_view": { "type": "string" },
+        "controlled_ref": { "type": "string" },
+        "uploaded_by": { "type": "string", "minLength": 1 },
+        "uploaded_at": { "type": "string", "minLength": 1 },
+        "authorized_reviewers": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": ["reviewer", "approved", "at"],
+      "properties": {
+        "reviewer": { "type": "string", "minLength": 1 },
+        "approved": { "type": "boolean" },
+        "at": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "action": {
+      "type": "object",
+      "required": [
+        "kind",
+        "owner_team",
+        "status",
+        "commitment",
+        "completed_at",
+        "submitted_by",
+        "submitted_at",
+        "evidence",
+        "reviews"
+      ],
+      "properties": {
+        "kind": {
+          "enum": ["根因调查", "用户补救", "制度修订", "复测"]
+        },
+        "owner_team": { "type": "string", "minLength": 1 },
+        "status": {
+          "enum": ["已分派", "进行中", "待审", "已通过", "已驳回", "已关闭"]
+        },
+        "commitment": {
+          "oneOf": [{ "$ref": "#/$defs/commitment" }, { "type": "null" }]
+        },
+        "completed_at": { "type": ["string", "null"] },
+        "submitted_by": { "type": ["string", "null"] },
+        "submitted_at": { "type": ["string", "null"] },
+        "evidence": {
+          "oneOf": [{ "$ref": "#/$defs/attachment" }, { "type": "null" }]
+        },
+        "reviews": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/review" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "lead": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "signal",
+        "observed_at",
+        "status",
+        "verification_note",
+        "verified_by",
+        "verified_at",
+        "incident_id"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "signal": { "type": "string", "minLength": 1 },
+        "observed_at": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["待核实", "已采纳", "未采纳"] },
+        "verification_note": { "type": ["string", "null"] },
+        "verified_by": { "type": ["string", "null"] },
+        "verified_at": { "type": ["string", "null"] },
+        "incident_id": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,703 @@
+{
+  "domain": "platform-gatekeeper-reporting",
+  "service": "major-event-remediation-reporting",
+  "version": 1,
+  "generated_at": "2026-09-27T09:00:00",
+  "incidents": [
+    {
+      "id": "INC-0001",
+      "title": "流量分配实验导致中小商家曝光歧视",
+      "level": "重大",
+      "domains": [
+        "算法",
+        "流量"
+      ],
+      "status": "已关闭",
+      "reporter": "流量值班工程师（历史）",
+      "first_detected_at": "2026-03-10T07:40:00",
+      "report_deadline": "2026-03-10T09:40:00",
+      "reported_at": "2026-03-10T08:00:00",
+      "merged_report_ids": [
+        "R-2026-0310-01"
+      ],
+      "source_team_reports": [
+        {
+          "report_id": "R-2026-0310-01",
+          "team": "流量与推荐团队",
+          "reporter": "流量值班工程师（历史）",
+          "occurred_at": "2026-03-10T07:20:00",
+          "rule_versions": [
+            "ranking-model@v291"
+          ],
+          "keywords": [
+            "流量",
+            "算法",
+            "歧视"
+          ],
+          "summary": "实验组流量分配对中小商家形成系统性曝光歧视",
+          "merged_at": "2026-03-10T08:00:00"
+        }
+      ],
+      "frozen_at": "2026-03-10T08:30:00",
+      "frozen_by": "合规值班经理（历史）",
+      "frozen": {
+        "affected_window": {
+          "start": "2026-03-10T06:00:00",
+          "end": "2026-03-10T07:55:00"
+        },
+        "rule_versions": [
+          "ranking-model@v291",
+          "traffic-policy@v108"
+        ],
+        "affected_subjects": {
+          "merchants": 620,
+          "merchant_type": "中小商家",
+          "regions": [
+            "华东",
+            "西南"
+          ]
+        },
+        "interim_measures": [
+          "停止实验分组",
+          "恢复v290排序策略",
+          "开放商家申诉专线"
+        ]
+      },
+      "freeze_revisions": [],
+      "actions": [
+        {
+          "kind": "根因调查",
+          "owner_team": "算法治理组",
+          "status": "已关闭",
+          "commitment": {
+            "action_kind": "根因调查",
+            "content": "查明实验分流缺陷",
+            "due_at": "2026-03-11T18:00:00",
+            "owner_team": "算法治理组"
+          },
+          "completed_at": "2026-03-11T15:00:00",
+          "submitted_by": "算法工程师（历史）",
+          "submitted_at": "2026-03-11T15:00:00",
+          "evidence": {
+            "id": "ATT-INC-0001-001",
+            "name": "实验分流根因报告（脱敏）",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "根因为实验哈希桶在特定商家规模上分布失衡",
+            "controlled_ref": "",
+            "uploaded_by": "算法工程师（历史）",
+            "uploaded_at": "2026-03-11T15:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-03-11T15:00:00",
+              "note": "根因清晰"
+            }
+          ]
+        },
+        {
+          "kind": "用户补救",
+          "owner_team": "商家服务组",
+          "status": "已关闭",
+          "commitment": {
+            "action_kind": "用户补救",
+            "content": "补偿受影响商家流量券",
+            "due_at": "2026-03-12T18:00:00",
+            "owner_team": "商家服务组"
+          },
+          "completed_at": "2026-03-12T16:00:00",
+          "submitted_by": "商家服务专员（历史）",
+          "submitted_at": "2026-03-12T16:00:00",
+          "evidence": {
+            "id": "ATT-INC-0001-002",
+            "name": "流量券补发清单（汇总）",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "已向620家商家补发等值流量券",
+            "controlled_ref": "",
+            "uploaded_by": "商家服务专员（历史）",
+            "uploaded_at": "2026-03-12T16:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-03-12T16:00:00",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "kind": "制度修订",
+          "owner_team": "平台规则组",
+          "status": "已关闭",
+          "commitment": {
+            "action_kind": "制度修订",
+            "content": "修订实验上线灰度规则",
+            "due_at": "2026-03-13T18:00:00",
+            "owner_team": "平台规则组"
+          },
+          "completed_at": "2026-03-13T10:00:00",
+          "submitted_by": "规则专员（历史）",
+          "submitted_at": "2026-03-13T10:00:00",
+          "evidence": {
+            "id": "ATT-INC-0001-003",
+            "name": "灰度发布规则修订文本",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "新增实验组商家覆盖比例上限与公平性观测卡口",
+            "controlled_ref": "",
+            "uploaded_by": "规则专员（历史）",
+            "uploaded_at": "2026-03-13T10:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-03-13T10:00:00",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "kind": "复测",
+          "owner_team": "质量与风控组",
+          "status": "已关闭",
+          "commitment": {
+            "action_kind": "复测",
+            "content": "对流量分配公平性复测",
+            "due_at": "2026-03-14T18:00:00",
+            "owner_team": "质量与风控组"
+          },
+          "completed_at": "2026-03-14T11:00:00",
+          "submitted_by": "复测工程师（历史）",
+          "submitted_at": "2026-03-14T11:00:00",
+          "evidence": {
+            "id": "ATT-INC-0001-004",
+            "name": "流量公平性复测报告",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "连续24小时分组曝光差异回落至阈值内",
+            "controlled_ref": "",
+            "uploaded_by": "复测工程师（历史）",
+            "uploaded_at": "2026-03-14T11:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-03-14T11:00:00",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "regulator_summary": "历史事件：四条整改线均已审签通过，复测无异常，事件关闭。",
+      "recurrence_links": [
+        "INC-0002"
+      ],
+      "created_from_lead_id": null,
+      "closed_at": "2026-03-14T11:00:00"
+    },
+    {
+      "id": "INC-0002",
+      "title": "排序模型回滚引发商家申诉失败、补贴错发与流量歧视",
+      "level": "重大",
+      "domains": [
+        "数据",
+        "算法",
+        "流量",
+        "规则"
+      ],
+      "status": "整改中",
+      "reporter": "算法值班工程师",
+      "first_detected_at": "2026-09-20T01:12:00",
+      "report_deadline": "2026-09-20T03:12:00",
+      "reported_at": "2026-09-20T01:40:00",
+      "merged_report_ids": [
+        "R-2026-0920-01",
+        "R-2026-0920-02",
+        "R-2026-0920-03"
+      ],
+      "source_team_reports": [
+        {
+          "report_id": "R-2026-0920-01",
+          "team": "算法团队",
+          "reporter": "算法值班工程师",
+          "occurred_at": "2026-09-20T01:05:00",
+          "rule_versions": [
+            "ranking-model@v318",
+            "subsidy-rule@v204"
+          ],
+          "keywords": [
+            "算法",
+            "回滚",
+            "流量"
+          ],
+          "summary": "v318排序模型回滚后申诉链路与补贴规则同时异常",
+          "merged_at": "2026-09-20T01:40:00"
+        },
+        {
+          "report_id": "R-2026-0920-02",
+          "team": "商家治理团队",
+          "reporter": "商家治理值班",
+          "occurred_at": "2026-09-20T01:30:00",
+          "rule_versions": [
+            "appeal-flow@v57",
+            "subsidy-rule@v204"
+          ],
+          "keywords": [
+            "申诉",
+            "补贴",
+            "价格"
+          ],
+          "summary": "申诉状态机卡单，补贴按旧价规则错发",
+          "merged_at": "2026-09-20T03:10:00"
+        },
+        {
+          "report_id": "R-2026-0920-03",
+          "team": "流量与推荐团队",
+          "reporter": "流量值班工程师",
+          "occurred_at": "2026-09-20T01:40:00",
+          "rule_versions": [
+            "ranking-model@v318",
+            "traffic-policy@v112"
+          ],
+          "keywords": [
+            "流量",
+            "歧视",
+            "算法"
+          ],
+          "summary": "v318回滚后流量分发对中小商家不友好",
+          "merged_at": "2026-09-20T03:40:00"
+        }
+      ],
+      "frozen_at": "2026-09-20T02:30:00",
+      "frozen_by": "合规值班经理",
+      "frozen": {
+        "affected_window": {
+          "start": "2026-09-20T00:50:00",
+          "end": "2026-09-20T02:10:00"
+        },
+        "rule_versions": [
+          "appeal-flow@v57",
+          "ranking-model@v318",
+          "subsidy-rule@v204",
+          "traffic-policy@v112"
+        ],
+        "affected_subjects": {
+          "merchants": 1340,
+          "consumers": 91200,
+          "merchant_types": [
+            "品牌商家",
+            "中小商家"
+          ],
+          "channels": [
+            "商家申诉",
+            "价格补贴",
+            "搜索流量"
+          ]
+        },
+        "interim_measures": [
+          "排序回滚至 ranking-model@v317",
+          "暂停补贴自动发放，改人工复核",
+          "积压申诉转人工通道限时处理",
+          "启用补贴垫付通道，对受影响商家先行赔付"
+        ]
+      },
+      "freeze_revisions": [
+        {
+          "field": "rule_versions",
+          "field_label": "规则/算法版本",
+          "before": [
+            "ranking-model@v318",
+            "appeal-flow@v57",
+            "subsidy-rule@v204"
+          ],
+          "after": [
+            "appeal-flow@v57",
+            "ranking-model@v318",
+            "subsidy-rule@v204"
+          ],
+          "reason": "归并团队 商家治理团队 上报，补充规则/算法版本",
+          "by": "商家治理值班",
+          "at": "2026-09-20T03:10:00"
+        },
+        {
+          "field": "rule_versions",
+          "field_label": "规则/算法版本",
+          "before": [
+            "appeal-flow@v57",
+            "ranking-model@v318",
+            "subsidy-rule@v204"
+          ],
+          "after": [
+            "appeal-flow@v57",
+            "ranking-model@v318",
+            "subsidy-rule@v204",
+            "traffic-policy@v112"
+          ],
+          "reason": "归并团队 流量与推荐团队 上报，补充规则/算法版本",
+          "by": "流量值班工程师",
+          "at": "2026-09-20T03:40:00"
+        },
+        {
+          "field": "interim_measures",
+          "field_label": "临时措施",
+          "before": [
+            "排序回滚至 ranking-model@v317",
+            "暂停补贴自动发放，改人工复核",
+            "积压申诉转人工通道限时处理"
+          ],
+          "after": [
+            "排序回滚至 ranking-model@v317",
+            "暂停补贴自动发放，改人工复核",
+            "积压申诉转人工通道限时处理",
+            "启用补贴垫付通道，对受影响商家先行赔付"
+          ],
+          "reason": "垫付通道上线，临时措施增加先行赔付",
+          "by": "商家服务组负责人",
+          "at": "2026-09-21T10:00:00"
+        },
+        {
+          "field": "affected_subjects",
+          "field_label": "受影响主体",
+          "before": {
+            "merchants": 1200,
+            "consumers": 86000,
+            "merchant_types": [
+              "品牌商家",
+              "中小商家"
+            ],
+            "channels": [
+              "商家申诉",
+              "价格补贴",
+              "搜索流量"
+            ]
+          },
+          "after": {
+            "merchants": 1340,
+            "consumers": 91200,
+            "merchant_types": [
+              "品牌商家",
+              "中小商家"
+            ],
+            "channels": [
+              "商家申诉",
+              "价格补贴",
+              "搜索流量"
+            ]
+          },
+          "reason": "全量日志核查扩样，主体数量上修",
+          "by": "数据核查组",
+          "at": "2026-09-22T15:00:00"
+        }
+      ],
+      "actions": [
+        {
+          "kind": "根因调查",
+          "owner_team": "算法治理组",
+          "status": "已通过",
+          "commitment": {
+            "action_kind": "根因调查",
+            "content": "定位回滚导致三链路异常的共同根因并出具报告",
+            "due_at": "2026-09-24T18:00:00",
+            "owner_team": "算法治理组"
+          },
+          "completed_at": "2026-09-23T17:00:00",
+          "submitted_by": "算法治理组工程师",
+          "submitted_at": "2026-09-23T17:00:00",
+          "evidence": {
+            "id": "ATT-INC-0002-005",
+            "name": "回滚共同根因分析报告（脱敏）",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "共同根因：回滚未同步申诉状态机与补贴、流量策略的版本兼容矩阵",
+            "controlled_ref": "",
+            "uploaded_by": "算法治理组工程师",
+            "uploaded_at": "2026-09-23T17:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-09-23T17:00:00",
+              "note": "根因链路完整，跨团队影响解释一致"
+            }
+          ]
+        },
+        {
+          "kind": "用户补救",
+          "owner_team": "商家服务组",
+          "status": "已驳回",
+          "commitment": {
+            "action_kind": "用户补救",
+            "content": "按冻结主体清单完成申诉补处理、补贴补差与流量补偿",
+            "due_at": "2026-09-25T18:00:00",
+            "owner_team": "商家服务组"
+          },
+          "completed_at": null,
+          "submitted_by": "商家服务组专员",
+          "submitted_at": "2026-09-26T16:00:00",
+          "evidence": {
+            "id": "ATT-INC-0002-006",
+            "name": "商家补发与补贴补差核算表",
+            "contains_trade_secret": true,
+            "visibility": "受控",
+            "redacted_view": "已脱敏：商家名称、结算单价与账户信息已遮蔽，仅保留批次与金额区间",
+            "controlled_ref": "vault://evidence/INC-0002/remedy-payroll",
+            "uploaded_by": "商家服务组专员",
+            "uploaded_at": "2026-09-26T16:00:00",
+            "authorized_reviewers": [
+              "合规审签人甲",
+              "监管联络人乙"
+            ]
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": false,
+              "at": "2026-09-26T16:00:00",
+              "note": "补发金额未覆盖冻结清单中全部1340家商家，需按修订后主体清单补差后重新提交"
+            }
+          ]
+        },
+        {
+          "kind": "制度修订",
+          "owner_team": "平台规则组",
+          "status": "进行中",
+          "commitment": {
+            "action_kind": "制度修订",
+            "content": "修订模型回滚预案与跨链路影响评审规则",
+            "due_at": "2026-09-29T18:00:00",
+            "owner_team": "平台规则组"
+          },
+          "completed_at": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "evidence": null,
+          "reviews": []
+        },
+        {
+          "kind": "复测",
+          "owner_team": "质量与风控组",
+          "status": "进行中",
+          "commitment": {
+            "action_kind": "复测",
+            "content": "对申诉、补贴、流量三类影响统一复测并出具报告",
+            "due_at": "2026-10-02T18:00:00",
+            "owner_team": "质量与风控组"
+          },
+          "completed_at": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "evidence": null,
+          "reviews": []
+        }
+      ],
+      "regulator_summary": "排序模型回滚事件根因已查明并通过审签；商家补发证据审签被驳回且承诺已逾期，制度修订仍在整改中（临近到期），复测尚未开始，未解决风险持续存在并将跟踪至关闭。",
+      "recurrence_links": [
+        "INC-0001"
+      ],
+      "created_from_lead_id": "LEAD-0001",
+      "closed_at": null
+    },
+    {
+      "id": "INC-0003",
+      "title": "商家数据接口字段权限配置错误",
+      "level": "较大",
+      "domains": [
+        "数据",
+        "规则"
+      ],
+      "status": "整改中",
+      "reporter": "数据安全值班",
+      "first_detected_at": "2026-09-25T09:00:00",
+      "report_deadline": "2026-09-26T09:00:00",
+      "reported_at": "2026-09-25T10:00:00",
+      "merged_report_ids": [
+        "R-2026-0925-01"
+      ],
+      "source_team_reports": [
+        {
+          "report_id": "R-2026-0925-01",
+          "team": "数据安全团队",
+          "reporter": "数据安全值班",
+          "occurred_at": "2026-09-25T09:00:00",
+          "rule_versions": [
+            "merchant-api@v73"
+          ],
+          "keywords": [
+            "数据",
+            "接口",
+            "权限"
+          ],
+          "summary": "接口越权返回非授权经营字段",
+          "merged_at": "2026-09-25T10:00:00"
+        }
+      ],
+      "frozen_at": "2026-09-25T11:00:00",
+      "frozen_by": "数据安全负责人",
+      "frozen": {
+        "affected_window": {
+          "start": "2026-09-24T20:00:00",
+          "end": "2026-09-25T09:30:00"
+        },
+        "rule_versions": [
+          "merchant-api@v73"
+        ],
+        "affected_subjects": {
+          "api_callers": 46,
+          "leaked_fields": [
+            "经营报表-毛利字段"
+          ]
+        },
+        "interim_measures": [
+          "下线越权字段",
+          "回滚接口配置至v72",
+          "通知调用方清除缓存"
+        ]
+      },
+      "freeze_revisions": [],
+      "actions": [
+        {
+          "kind": "根因调查",
+          "owner_team": "数据安全组",
+          "status": "已通过",
+          "commitment": {
+            "action_kind": "根因调查",
+            "content": "查明权限配置错误来源",
+            "due_at": "2026-09-26T18:00:00",
+            "owner_team": "数据安全组"
+          },
+          "completed_at": "2026-09-26T14:00:00",
+          "submitted_by": "数据安全工程师",
+          "submitted_at": "2026-09-26T14:00:00",
+          "evidence": {
+            "id": "ATT-INC-0003-007",
+            "name": "权限配置根因说明",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "根因为字段分级表漏配毛利字段的授权角色",
+            "controlled_ref": "",
+            "uploaded_by": "数据安全工程师",
+            "uploaded_at": "2026-09-26T14:00:00",
+            "authorized_reviewers": []
+          },
+          "reviews": [
+            {
+              "reviewer": "合规审签人甲",
+              "approved": true,
+              "at": "2026-09-26T14:00:00",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "kind": "用户补救",
+          "owner_team": "商家服务组",
+          "status": "待审",
+          "commitment": {
+            "action_kind": "用户补救",
+            "content": "排查调用方留存并通知受影响商家",
+            "due_at": "2026-09-28T18:00:00",
+            "owner_team": "商家服务组"
+          },
+          "completed_at": "2026-09-26T18:30:00",
+          "submitted_by": "商家服务组专员",
+          "submitted_at": "2026-09-26T18:30:00",
+          "evidence": {
+            "id": "ATT-INC-0003-008",
+            "name": "调用方留存排查与商家通知记录",
+            "contains_trade_secret": false,
+            "visibility": "内部",
+            "redacted_view": "46个调用方已排查，商家通知已发出，留存清除证明待补",
+            "controlled_ref": "",
+            "uploaded_by": "商家服务组专员",
+            "uploaded_at": "2026-09-26T18:30:00",
+            "authorized_reviewers": []
+          },
+          "reviews": []
+        },
+        {
+          "kind": "制度修订",
+          "owner_team": "平台规则组",
+          "status": "进行中",
+          "commitment": {
+            "action_kind": "制度修订",
+            "content": "修订接口字段分级与发布校验规则",
+            "due_at": "2026-10-02T18:00:00",
+            "owner_team": "平台规则组"
+          },
+          "completed_at": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "evidence": null,
+          "reviews": []
+        },
+        {
+          "kind": "复测",
+          "owner_team": "质量与风控组",
+          "status": "进行中",
+          "commitment": {
+            "action_kind": "复测",
+            "content": "对全量字段权限矩阵复测",
+            "due_at": "2026-10-06T18:00:00",
+            "owner_team": "质量与风控组"
+          },
+          "completed_at": null,
+          "submitted_by": null,
+          "submitted_at": null,
+          "evidence": null,
+          "reviews": []
+        }
+      ],
+      "regulator_summary": "数据接口越权事件根因已审签通过；用户补救证据正在审签，制度修订与复测未完成，未解决风险仍在整改中。",
+      "recurrence_links": [],
+      "created_from_lead_id": null,
+      "closed_at": null
+    }
+  ],
+  "leads": [
+    {
+      "id": "LEAD-0001",
+      "source": "算法运行监测平台",
+      "signal": "实验组商家曝光骤降，申诉队列积压，疑似与排序模型回滚有关",
+      "observed_at": "2026-09-19T23:35:00",
+      "status": "已采纳",
+      "verification_note": "监测信号与值班告警一致，疑似模型回滚引发多链路影响，采纳立案",
+      "verified_by": "合规值班经理",
+      "verified_at": "2026-09-20T01:40:00",
+      "incident_id": "INC-0002"
+    },
+    {
+      "id": "LEAD-0002",
+      "source": "价格异常波动监测",
+      "signal": "部分类目成交价短时下滑",
+      "observed_at": "2026-09-15T10:00:00",
+      "status": "未采纳",
+      "verification_note": "经核实为平台大促正常降价，无违法风险，不予立案",
+      "verified_by": "合规值班经理",
+      "verified_at": "2026-09-16T11:00:00",
+      "incident_id": null
+    },
+    {
+      "id": "LEAD-0003",
+      "source": "流量公平性监测",
+      "signal": "某区域中小商家曝光差异扩大，需人工核实是否与回滚残留有关",
+      "observed_at": "2026-09-27T08:20:00",
+      "status": "待核实",
+      "verification_note": null,
+      "verified_by": null,
+      "verified_at": null,
+      "incident_id": null
+    }
+  ]
+}
